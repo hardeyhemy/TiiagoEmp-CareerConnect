@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exclusive Access - Tiiago Emporium Career Connect</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://source.unsplash.com/1600x900/?job,graduate') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .cta-button {
+            background: #FF9800;
+            color: white;
+            padding: 15px 30px;
+            font-size: 22px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+        .cta-button:hover {
+            background: #E68900;
+        }
+        .countdown {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFD700;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function countdownTimer() {
+            let countDownDate = new Date().getTime() + (24 * 60 * 60 * 1000);
+            let x = setInterval(function() {
+                let now = new Date().getTime();
+                let distance = countDownDate - now;
+                let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById("countdown").innerHTML = hours + "h " + minutes + "m " + seconds + "s left";
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("countdown").innerHTML = "Time Expired!";
+                }
+            }, 1000);
+        }
+        
+        function convertCurrency() {
+            fetch('https://ipapi.co/country/').then(response => response.text()).then(country => {
+                let currency = country === 'NG' ? '₦2,000' : '$5';
+                document.getElementById("price").innerHTML = "One-time Payment: " + currency;
+            }).catch(() => {
+                document.getElementById("price").innerHTML = "One-time Payment: ₦2,000 or $5";
+            });
+        }
+    </script>
+</head>
+<body onload="countdownTimer(); convertCurrency();">
+    <div class="container">
+        <h1>🚀 Join <span id="agency-name">Tiiago Emporium Career Connect</span> Today!</h1>
+        <p>Unlock exclusive job opportunities from top companies.</p>
+        <p>⏳ Limited Spots Available - Offer Ends Soon!</p>
+        <p class="countdown" id="countdown"></p>
+        <p id="price">One-time Payment: ₦2,000 or $5</p>
+        <p><strong>⚠️ Non-refundable Payment</strong></p>
+        <a href="https://flutterwave.com/pay/ir8d0e3ivq3m" class="cta-button">💳 Secure Your Access Now</a>
+    </div>
+</body>
+</html>
